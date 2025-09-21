@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NewTodoForm } from "./NewTodoForm";
 import { TodoList } from "./TodoList";
 import "./style.css";
-// I 
 
 
 
@@ -25,6 +24,8 @@ export default function App() {
       ];
     });
   }
+
+  // addded counter
 
   function toggleTodo(id, completed) {
     setTodos(currentTodos => {

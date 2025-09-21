@@ -11,7 +11,14 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
     setIsEditing(false);
   }
 
+
+
+  
   return (
+
+    <div>
+
+    <p> Count : {}</p>
     <li className="todo-item">
       {isEditing ? (
         <form onSubmit={handleEditSubmit} className="edit-form">
@@ -29,7 +36,7 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
             className="btn btn-danger"
             onClick={() => {
               setIsEditing(false);
-              setEditedTitle(title); // reset if cancelled
+              setEditedTitle(title);
             }}
           >
             Cancel
@@ -44,6 +51,7 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
               flex: 1
             }}
           >
+         
             <input
               type="checkbox"
               checked={completed}
@@ -51,10 +59,13 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
             />
             {title}
           </label>
+          
           <button onClick={() => setIsEditing(true)} className="btn">Edit</button>
           <button onClick={() => deleteTodo(id)} className="btn btn-danger">Delete</button>
+        
         </>
       )}
     </li>
+    </div>
   );
 }
