@@ -25,7 +25,7 @@ export default function App() {
     });
   }
 
-  // addded counter
+
 
   function toggleTodo(id, completed) {
     setTodos(currentTodos => {
@@ -49,14 +49,29 @@ export default function App() {
       todo.id === id ? { ...todo, title: newTitle } : todo
     )
   );
-}
+}  
+
+
+
+
+ const completedCount =  todos.filter(todo => todo.completed).length
+
 
 
   return (
     <>
+
+      <p1>
+        Count : {completedCount}/{todos.length}
+      </p1>
+      <p1>
+        {/* sort : {showTodo} */}
+      </p1>
+    
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+      <TodoList todos={coustomDisplay} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+      
     </>
   );
 }

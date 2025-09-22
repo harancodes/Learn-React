@@ -9,7 +9,7 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
     if (editedTitle.trim() === "") return;
     editTodo(id, editedTitle);
     setIsEditing(false);
-  }
+        }
 
 
 
@@ -18,11 +18,11 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
 
     <div>
 
-    <p> Count : {}</p>
+  
     <li className="todo-item">
       {isEditing ? (
         <form onSubmit={handleEditSubmit} className="edit-form">
-        <textarea
+        <input
   value={editedTitle}
   onChange={e => setEditedTitle(e.target.value)}
   className="edit-input"

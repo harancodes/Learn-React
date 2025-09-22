@@ -1,0 +1,22 @@
+import React, { useRef } from "react";
+
+function App() {
+  // Create a ref
+  const inputRef = useRef(null);
+
+  function handle() {
+    // Focus the input when button is clicked
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+      <h1>useRef Example</h1>
+      {/* Attach the ref to the input */}
+      <input type="text" ref={inputRef} />
+      <button onClick={handle}>Focus Input</button>
+    </>
+  );
+}
+
+export default App;
