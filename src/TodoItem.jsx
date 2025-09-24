@@ -22,7 +22,7 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
     <li className="todo-item">
       {isEditing ? (
         <form onSubmit={handleEditSubmit} className="edit-form">
-        <input
+        <textarea
   value={editedTitle}
   onChange={e => setEditedTitle(e.target.value)}
   className="edit-input"

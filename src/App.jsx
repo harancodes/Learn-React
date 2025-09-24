@@ -5,7 +5,10 @@ import "./style.css";
 
 
 
+
+
 export default function App() {
+  const [count, setCount] = useState(0)
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
     if (localValue == null) return [];
@@ -14,6 +17,8 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
+    setCount(prev => prev+1)
+
   }, [todos]);
 
   function addTodo(title) {
@@ -51,26 +56,25 @@ export default function App() {
   );
 }  
 
+// search 
+// const [search, setSearch] = useState("")
+
+// const filterTodo = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
 
 
+  
 
- const completedCount =  todos.filter(todo => todo.completed).length
+
 
 
 
   return (
     <>
-
-      <p1>
-        Count : {completedCount}/{todos.length}
-      </p1>
-      <p1>
-        {/* sort : {showTodo} */}
-      </p1>
-    
+      {/* <input type="text" placeholder="type something" value={search} onChange={(e) => {setSearch(e.target.value)}} /> */}
+      <p> {count}</p>
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
-      <TodoList todos={coustomDisplay} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
       
     </>
   );
