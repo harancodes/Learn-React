@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// want to learn useRef
+
 export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
