@@ -8,7 +8,7 @@ import "./style.css";
 
 
 export default function App() {
-  const [count, setCount] = useState(0)
+
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
     if (localValue == null) return [];
@@ -17,19 +17,29 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
-    setCount(prev => prev+1)
+  
 
   }, [todos]);
 
-  function addTodo(title) {
-    setTodos(currentTodos => {
-      return [
-        ...currentTodos,
-        { id: crypto.randomUUID(), title, completed: false }
-      ];
-    });
-  }
+ function addTodo(title) {
+  setTodos(currentTodos => {
+      const exist = currentTodos.some( todo => todo.title.toLowerCase() === title.toLowerCase())
 
+      if (exist){
+        window.confirm("should I add this ")
+        return currentTodos
+      }
+   
+    return [
+      ...currentTodos,
+      { id: crypto.randomUUID(), title, completed: false }
+    ];
+  });
+}
+
+
+
+  
 
 
   function toggleTodo(id, completed) {
@@ -56,22 +66,17 @@ export default function App() {
   );
 }  
 
-// search 
-// const [search, setSearch] = useState("")
-
-// const filterTodo = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
-
 
   
 
 
 
-
-
   return (
     <>
-      {/* <input type="text" placeholder="type something" value={search} onChange={(e) => {setSearch(e.target.value)}} /> */}
-      <p> {count}</p>
+     
+      
+   
+
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
