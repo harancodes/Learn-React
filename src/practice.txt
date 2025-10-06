@@ -1,0 +1,49 @@
+// counter using useState, useEffect 
+
+import React, {useState, useEffect} from "react"; 
+
+function App(){
+
+    const [counter , setCounter] = useState(0)
+    const status = counter % 2 === 0 ? "red" : "green"
+
+
+
+    return (
+
+        <div> 
+       <h1 style={{ color: status }}>{counter}</h1>
+        <p> {status}</p>
+        <button onClick= { () => setCounter(counter+1)}> add  </button>
+        <button onClick= { () => setCounter(counter-1)} disabled = {counter === 0}> minus  </button>
+               <button onClick= { () => setCounter(0)}> Reset</button>
+        
+        </div>
+    )
+    
+}
+
+export default App
+
+
+/////
+
+// counter using useState, useEffect 
+
+import React, {useState, useEffect} from "react"; 
+
+function App(){
+
+const [colors , setColor] = useState("")
+
+return (
+
+    <div> 
+    <input type="text" value= {colors} onChange= {(e) => {setColor(e.target.value)}}/>
+          <h1 style={{ color: colors}}>h1</h1>
+    </div>
+)
+    
+}
+
+export default App

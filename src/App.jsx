@@ -24,7 +24,13 @@ export default function App() {
  function addTodo(title) {
   setTodos(currentTodos => {
       const exist = currentTodos.some( todo => todo.title.toLowerCase() === title.toLowerCase())
+  const capital = currentTodos.some(title === title.toUpperCase());
 
+      if (capital) {
+        alert("no capital")
+        return currentTodos
+      }
+// checking title wiht already saved titiel
       if (exist){
         window.confirm("should I add this ")
         return currentTodos
@@ -36,8 +42,6 @@ export default function App() {
     ];
   });
 }
-
-
 
   
 
@@ -65,21 +69,22 @@ export default function App() {
     )
   );
 }  
+  const [search, setSearch] = useState("")
+ const searchMode = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
 
+  // const completeCount = todos.filter(todo => todo.completed).length
 
-  
-
-
+// const pendingCount =  todos.length - completeCount
 
   return (
     <>
      
-      
-   
+      {/* <p> {completeCount} / {pendingCount}</p> */}
+      <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder = "search here"/>
 
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+      <TodoList todos={searchMode} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
       
     </>
   );
