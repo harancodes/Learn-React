@@ -47,3 +47,169 @@ return (
 }
 
 export default App
+
+
+
+
+//////////////
+
+import React, {useState, useEffect , useRef} from "react";
+// windows resize 
+function App(){
+
+    const [resize, setResize] = useState({width: window.innerWidth, height: window.innerHeight})
+
+
+    useEffect(() => {
+        function handleResize(){
+            setResize({width: window.innerWidth, height: window.innerHeight})
+        }
+        window.addEventListener("resize", handleResize)
+
+        return () => {
+             window.removeEventListener("resize", handleResize)
+        }
+    },[]);
+
+    
+
+    
+    return (
+        <div> 
+        <p> {resize.width}</p>
+        <p> {resize.height}</p>
+        </div>
+    )
+    
+    
+}
+
+
+export default App
+
+
+
+/////
+
+// toggle button 
+
+import React, {useEffect, useState} from "react";
+
+export default  function App(){
+    const [isOn, setIsOn] = useState(false)
+
+    function handleToggle(){
+        setIsOn((prev) => !prev)
+    }
+    return (
+        <div> 
+        <button onClick={handleToggle} >{isOn ? "ON" : "OFF"}</button>
+        
+        </div>
+    )
+    
+} 
+
+
+////
+import React , {useState, useEffect } from "react" ; 
+
+function App(){
+
+    const [name, setName] = useState("")
+    useEffect(() => {
+        const savedName = localStorage.getItem("name")
+        if (savedName){
+        setName(savedName)
+        }
+    },[])
+    function handleSubmit(e){
+        e.preventDefault()
+        localStorage.setItem("name", name )
+    }
+    return (
+        <div>
+            <form onSubmit = {handleSubmit}>
+                <input type = "text" value={name} onChange={(e) => {setName(e.target.value)}}  />
+                <button type = "submit">Button </button>
+            </form>
+            {name}
+        </div>
+    )
+    
+}
+
+export default App
+
+
+//// Parent to child i
+
+// Pass data from child to parent using props toggle list 
+import React, {useEffect, useState} from "react";
+function Parent(){
+    const [text, setText] = useState("")
+    function handleText(msg){
+        setText(msg)
+    }
+    return (
+        <div>
+        <Child handleText = {handleText}/>
+        <pre> {text}</pre>
+        </div>
+    )
+}
+function Child({handleText}){
+    const [message , setMessage]   = useState("")
+
+    return (
+        <div> 
+        <select value = {message} onChange={(e) => {handleText(e.target.value) ,setMessage(e.target.value)} }>
+        <option> Mango</option>
+        <option> Orange</option>
+        <option> Apple </option>
+        </select>
+        </div>
+    )
+    
+}
+
+export default Parent
+
+
+/////
+import React, { useState } from "react";
+
+function Parent() {
+  const [todos, setTodos] = useState("");
+  const [saved, setSaved] = useState([]);
+
+  function handleName(e) {
+    e.preventDefault();
+    if (todos.trim() === "") return; 
+    setSaved((prev) => [...prev, todos]);
+    setTodos("");
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleName}>
+        <input
+          value={todos}
+          onChange={(e) => setTodos(e.target.value)}
+          placeholder="Add todo"
+        />
+        <button type="submit">Submit</button>
+      </form>
+
+      <ul style={{ listStyleType: "none", padding: 0 }}>
+        {saved.map((item, index) => (
+          <li key={index}>
+            <input type="checkbox" /> {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Parent;

@@ -8,7 +8,7 @@ import "./style.css";
 
 
 export default function App() {
-
+  
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
     if (localValue == null) return [];
@@ -17,21 +17,17 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
-  
+
 
   }, [todos]);
 
  function addTodo(title) {
   setTodos(currentTodos => {
       const exist = currentTodos.some( todo => todo.title.toLowerCase() === title.toLowerCase())
-  const capital = currentTodos.some(title === title.toUpperCase());
-
-      if (capital) {
-        alert("no capital")
-        return currentTodos
-      }
+  
 // checking title wiht already saved titiel
       if (exist){
+
         window.confirm("should I add this ")
         return currentTodos
       }
@@ -81,7 +77,7 @@ export default function App() {
      
       {/* <p> {completeCount} / {pendingCount}</p> */}
       <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder = "search here"/>
-
+   
       <NewTodoForm onSubmit={addTodo} />
       <h1 className="header">Todo List</h1>
       <TodoList todos={searchMode} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
