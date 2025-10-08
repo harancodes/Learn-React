@@ -213,3 +213,52 @@ function Parent() {
 }
 
 export default Parent;
+
+
+
+
+// counter using useRef
+import React, {useEffect, useState, useRef} from "react";
+export default function  App(){
+    const [counter, setCounter] = useState(0)
+    const [isRunning, setIsRunning] = useState(false)
+    const intervalRef = useRef(null)
+
+    useEffect(() => {
+            if(isRunning){
+                intervalRef.current = setInterval(() => {
+                    setCounter((prev) => prev+1)
+                }, 1000)
+            }else{
+                clearInterval(intervalRef.current)
+            }
+        return ()=> {
+            clearInterval(intervalRef.current)
+        }
+    },[isRunning ])
+
+ const startTimer = () => {
+            setIsRunning(true)
+ }
+
+const stopTimer = () => {
+setIsRunning(false)
+     
+ }
+const resetTimer = () =>{
+      setIsRunning(false);
+ setCounter(0)
+}
+
+    return (
+        <div> 
+            <h2>  COUNTER </h2>
+            <pre> {counter}</pre>
+            <button onClick = {startTimer} > Start</button>
+            <button onClick= {stopTimer} > Stop</button>
+            <button onClick= {resetTimer}>Reset</button>
+        </div>
+    )
+
+    
+}
