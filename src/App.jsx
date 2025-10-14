@@ -8,7 +8,7 @@ import "./style.css";
 
 
 export default function App() {
-  
+
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("ITEMS");
     if (localValue == null) return [];
@@ -25,10 +25,10 @@ export default function App() {
   setTodos(currentTodos => {
       const exist = currentTodos.some( todo => todo.title.toLowerCase() === title.toLowerCase())
   
-// checking title wiht already saved titiel
+
       if (exist){
 
-        window.confirm("should I add this ")
+       alert("Cannot add for there is a duplicate !") 
         return currentTodos
       }
    
@@ -65,22 +65,16 @@ export default function App() {
     )
   );
 }  
-  const [search, setSearch] = useState("")
- const searchMode = todos.filter(todo => todo.title.toLowerCase().includes(search.toLowerCase()))
 
-  // const completeCount = todos.filter(todo => todo.completed).length
 
-// const pendingCount =  todos.length - completeCount
 
   return (
     <>
      
-      {/* <p> {completeCount} / {pendingCount}</p> */}
-      <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder = "search here"/>
-   
       <NewTodoForm onSubmit={addTodo} />
-      <h1 className="header">Todo List</h1>
-      <TodoList todos={searchMode} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
+     
+     
+        <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
       
     </>
   );

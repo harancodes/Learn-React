@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState } from "
 export function NewTodoForm({ onSubmit }) {
   const [newItem, setNewItem] = useState("");
 
@@ -9,11 +8,11 @@ export function NewTodoForm({ onSubmit }) {
     onSubmit(newItem);
     setNewItem("");
   }
-
+c
   return (
     <form onSubmit={handleSubmit} className="new-item-form">
       <div className="form-row">
-        <label htmlFor="item">Todo List</label>
+        <label htmlFor="item"><h1 style= {{color: "white"}}>Todo List</h1></label>
         <input
           value={newItem}
           onChange={e => setNewItem(e.target.value)}
@@ -25,3 +24,4 @@ export function NewTodoForm({ onSubmit }) {
     </form>
   );
 }
+// iiiii

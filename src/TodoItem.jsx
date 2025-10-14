@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// want to learn useRef
+
 
 export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTodo }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,6 +11,12 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
     if (editedTitle.trim() === "") return;
     editTodo(id, editedTitle);
     setIsEditing(false);
+    const exist = todos.some(todo => todo.title.toLowerCase() === editedTitle.toLowerCase())
+
+    if (exist){
+      alert("duplicate")
+      return ;
+    }
         }
 
 
@@ -31,8 +37,15 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
   autoFocus
   rows={3}
 />
+<button
+  type="submit"
+  className="btn"
+ 
+>
+  Save
+</button>
 
-          <button type="submit" className="btn">Save</button>
+        
           <button
             type="button"
             className="btn btn-danger"
@@ -46,21 +59,11 @@ export function TodoItem({ completed, id, title, toggleTodo, deleteTodo, editTod
         </form>
       ) : (
         <>
-          <label
-            style={{
-              textDecoration: completed ? "line-through" : "none",
-              color: completed ? "gray" : "black",
-              flex: 1
-            }}
-          >
-         
-            <input
-              type="checkbox"
-              checked={completed}
-              onChange={e => toggleTodo(id, e.target.checked)}
-            />
-            {title}
-          </label>
+       <label style={{ flex: 1, textDecoration: completed ? "line-through" : "none" }}>
+  <input type="checkbox" checked={completed} onChange={e => toggleTodo(id, e.target.checked)} />
+  <span>{title}</span>
+</label>
+
           
           <button onClick={() => setIsEditing(true)} className="btn">Edit</button>
           <button onClick={() => deleteTodo(id)} className="btn btn-danger">Delete</button>
